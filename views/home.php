@@ -4,7 +4,7 @@
 <div class="layout-with-sidebar">
     <aside class="sidebar">
         <div class="sidebar-section">
-            <h3>📚 Categorías</h3>
+            <h3>Categorías</h3>
             <div class="category-list">
                 <?php foreach ($categories as $category): ?>
                     <a href="/category/<?php echo htmlspecialchars($category['slug']); ?>" class="category-item">
@@ -17,7 +17,7 @@
         
         <?php if (!empty($trending)): ?>
         <div class="sidebar-section">
-            <h3>🔥 Tendencias</h3>
+            <h3>Tendencias</h3>
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                 <?php foreach ($trending as $index => $post): ?>
                     <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="trending-post">

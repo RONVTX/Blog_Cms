@@ -1,6 +1,6 @@
 <?php
 
-define('APP_NAME', 'Mi Blog CMS');
+define('APP_NAME', 'Bloging');
 define('APP_URL', 'http://localhost');
 define('APP_ENV', 'development');
 
