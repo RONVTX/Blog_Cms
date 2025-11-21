@@ -98,7 +98,7 @@
                             </div>
                             
                             <p class="post-excerpt">
-                                <?php echo htmlspecialchars(substr($post['content'], 0, 150)); ?>...
+                                <?php echo htmlspecialchars(substr($post['content'], 0, 300)); ?>...
                             </p>
                             
                             <div class="post-footer">

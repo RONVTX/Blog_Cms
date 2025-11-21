@@ -52,7 +52,7 @@ Router::get('/register', 'AuthController', 'showRegister', 'GuestMiddleware');
 Router::post('/register', 'AuthController', 'register', 'GuestMiddleware');
 Router::get('/blog/{slug}', 'PostController', 'show');
 Router::get('/category/{slug}', 'CategoryController', 'show');
-
+Router::get('/tag/{slug}', 'TagController', 'show');
 Router::get('/search', 'SearchController', 'index');
 
 // Rutas protegidas
@@ -63,20 +63,66 @@ Router::get('/post/edit/{id}', 'PostController', 'edit', 'AuthMiddleware');
 Router::post('/post/edit/{id}', 'PostController', 'update', 'AuthMiddleware');
 Router::post('/post/delete/{id}', 'PostController', 'delete', 'AuthMiddleware');
 
-// Rutas de comentarios
+// Comentarios
 Router::post('/comment/{postId}', 'CommentController', 'store', 'AuthMiddleware');
 Router::post('/comment/delete/{id}', 'CommentController', 'delete', 'AuthMiddleware');
 
-// Rutas de likes
+// Likes
 Router::post('/like/{postId}', 'LikeController', 'toggle', 'AuthMiddleware');
 
-// Rutas de marcadores
+// Marcadores
 Router::post('/bookmark/{postId}', 'BookmarkController', 'toggle', 'AuthMiddleware');
 Router::get('/bookmarks', 'BookmarkController', 'index', 'AuthMiddleware');
 
-// Rutas de perfil
-// Colocar rutas estáticas antes de la ruta dinámica para evitar colisiones
+// Perfil - Rutas específicas ANTES de rutas parametrizadas
 Router::get('/profile/edit', 'ProfileController', 'edit', 'AuthMiddleware');
 Router::post('/profile/update', 'ProfileController', 'update', 'AuthMiddleware');
-// Ruta dinámica para mostrar perfil por nombre de usuario (debe quedar al final)
 Router::get('/profile/{username}', 'ProfileController', 'show');
+
+// Seguidores
+Router::post('/follow/{userId}', 'FollowerController', 'toggle', 'AuthMiddleware');
+Router::get('/profile/{username}/followers', 'FollowerController', 'followers');
+Router::get('/profile/{username}/following', 'FollowerController', 'following');
+
+// Notificaciones
+Router::get('/notifications', 'NotificationController', 'index', 'AuthMiddleware');
+Router::post('/notifications/{id}/read', 'NotificationController', 'markAsRead', 'AuthMiddleware');
+Router::post('/notifications/read-all', 'NotificationController', 'markAllAsRead', 'AuthMiddleware');
+Router::get('/notifications/unread-count', 'NotificationController', 'getUnreadCount', 'AuthMiddleware');
+
+// Reportes
+Router::post('/report', 'ReportController', 'store', 'AuthMiddleware');
+
+// PANEL DE ADMINISTRACIÓN
+Router::get('/admin', 'AdminController', 'dashboard', 'AdminMiddleware');
+Router::get('/admin/dashboard', 'AdminController', 'dashboard', 'AdminMiddleware');
+
+// Admin - Usuarios
+Router::get('/admin/users', 'AdminController', 'users', 'AdminMiddleware');
+Router::post('/admin/users/role', 'AdminController', 'updateUserRole', 'AdminMiddleware');
+Router::post('/admin/users/status', 'AdminController', 'updateUserStatus', 'AdminMiddleware');
+Router::post('/admin/users/delete', 'AdminController', 'deleteUser', 'AdminMiddleware');
+
+// Admin - Posts
+Router::get('/admin/posts', 'AdminController', 'posts', 'AdminMiddleware');
+Router::post('/admin/posts/status', 'AdminController', 'updatePostStatus', 'AdminMiddleware');
+Router::post('/admin/posts/featured', 'AdminController', 'toggleFeatured', 'AdminMiddleware');
+Router::post('/admin/posts/delete', 'AdminController', 'deletePost', 'AdminMiddleware');
+
+// Admin - Comentarios
+Router::get('/admin/comments', 'AdminController', 'comments', 'AdminMiddleware');
+Router::post('/admin/comments/status', 'AdminController', 'updateCommentStatus', 'AdminMiddleware');
+Router::post('/admin/comments/delete', 'AdminController', 'deleteComment', 'AdminMiddleware');
+
+// Admin - Reportes
+Router::get('/admin/reports', 'AdminController', 'reports', 'AdminMiddleware');
+Router::post('/admin/reports/status', 'AdminController', 'updateReportStatus', 'AdminMiddleware');
+
+// Admin - Categorías
+Router::get('/admin/categories', 'AdminController', 'categories', 'AdminMiddleware');
+Router::get('/admin/categories/create', 'AdminController', 'createCategory', 'AdminMiddleware');
+Router::post('/admin/categories/store', 'AdminController', 'storeCategory', 'AdminMiddleware');
+
+// Admin - Configuración
+Router::get('/admin/settings', 'AdminController', 'settings', 'AdminMiddleware');
+Router::post('/admin/settings/update', 'AdminController', 'updateSettings', 'AdminMiddleware');

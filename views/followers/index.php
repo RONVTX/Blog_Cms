@@ -1,0 +1,93 @@
+<?php $pageTitle = ($type === 'followers' ? 'Seguidores' : 'Siguiendo') . ' de ' . htmlspecialchars($user['username']); ?>
+<?php include __DIR__ . '/../layouts/header.php'; ?>
+
+<div class="container" style="max-width: 800px; margin-top: 2rem;">
+    <h1 style="margin-bottom: 2rem;">
+        <?php echo $type === 'followers' ? '👥 Seguidores' : '🔗 Siguiendo'; ?> 
+        de <?php echo htmlspecialchars($user['username']); ?>
+    </h1>
+    
+    <?php if (empty($followers)): ?>
+        <div class="empty-state" style="text-align: center; padding: 4rem 2rem;">
+            <p style="font-size: 3rem;">👥</p>
+            <p style="color: var(--text-light);">
+                <?php echo $type === 'followers' ? 'Este usuario aún no tiene seguidores' : 'Este usuario no sigue a nadie aún'; ?>
+            </p>
+        </div>
+    <?php else: ?>
+        <div style="display: grid; gap: 1.5rem;">
+            <?php foreach ($followers as $follower): ?>
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); display: flex; justify-content: space-between; align-items: center;">
+                    <a href="/profile/<?php echo htmlspecialchars($follower['username']); ?>" 
+                       style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; flex: 1;">
+                        <?php if ($follower['avatar']): ?>
+                            <img src="/<?php echo htmlspecialchars($follower['avatar']); ?>" 
+                                 alt="<?php echo htmlspecialchars($follower['username']); ?>"
+                                 style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary);">
+                        <?php else: ?>
+                            <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 700;">
+                                <?php echo strtoupper(substr($follower['username'], 0, 1)); ?>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <div>
+                            <h3 style="margin-bottom: 0.25rem;"><?php echo htmlspecialchars($follower['username']); ?></h3>
+                            <?php if ($follower['bio']): ?>
+                                <p style="color: var(--text-light); font-size: 0.875rem;">
+                                    <?php echo htmlspecialchars(substr($follower['bio'], 0, 100)); ?>
+                                    <?php echo strlen($follower['bio']) > 100 ? '...' : ''; ?>
+                                </p>
+                            <?php endif; ?>
+                        </div>
+                    </a>
+                    
+                    <?php if (Session::isLoggedIn() && Session::getUserId() != $follower['id']): ?>
+                        <?php 
+                        $followerModel = new Follower();
+                        $isFollowing = $followerModel->isFollowing(Session::getUserId(), $follower['id']);
+                        ?>
+                        <button 
+                            onclick="toggleFollow(<?php echo $follower['id']; ?>, this)"
+                            class="btn <?php echo $isFollowing ? 'btn-outline' : 'btn-primary'; ?>">
+                            <?php echo $isFollowing ? '✓ Siguiendo' : '+ Seguir'; ?>
+                        </button>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+    
+    <div style="margin-top: 2rem; text-align: center;">
+        <a href="/profile/<?php echo htmlspecialchars($user['username']); ?>" class="btn btn-outline">
+            ← Volver al perfil
+        </a>
+    </div>
+</div>
+
+<script>
+function toggleFollow(userId, button) {
+    fetch(`/follow/${userId}`, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            if (data.is_following) {
+                button.className = 'btn btn-outline';
+                button.innerHTML = '✓ Siguiendo';
+            } else {
+                button.className = 'btn btn-primary';
+                button.innerHTML = '+ Seguir';
+            }
+        } else {
+            alert(data.message || 'Error');
+            if (data.message && data.message.includes('iniciar sesión')) {
+                window.location.href = '/login';
+            }
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+
+<?php include __DIR__ . '/../layouts/footer.php'; ?>

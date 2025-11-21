@@ -21,14 +21,18 @@ class User {
     }
 
     public function findById($id) {
-        $sql = "SELECT id, username, email, avatar, bio, created_at FROM users WHERE id = ?";
+        // MEJORADO: Ahora siempre devuelve todas las columnas incluyendo role
+        $sql = "SELECT id, username, email, avatar, bio, role, status, created_at FROM users WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetch();
+        $result = $stmt->fetch();
+        
+        // Si no encuentra usuario, devolver array vacío en lugar de false
+        return $result !== false ? $result : null;
     }
 
     public function findByUsername($username) {
-        $sql = "SELECT id, username, email, avatar, bio, created_at FROM users WHERE username = ?";
+        $sql = "SELECT id, username, email, avatar, bio, role, status, created_at FROM users WHERE username = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$username]);
         return $stmt->fetch();

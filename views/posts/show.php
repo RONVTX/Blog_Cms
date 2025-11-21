@@ -72,7 +72,7 @@
     </div>
 
     <div class="post-body">
-        <div class="post-content">
+        <div class="post-content" style="max-height: none; overflow: visible;">
             <?php echo nl2br(htmlspecialchars($post['content'])); ?>
         </div>
     </div>
@@ -145,11 +145,14 @@
                                 </div>
                             </div>
                             
-                            <?php if (Session::isLoggedIn() && Session::getUserId() == $comment['user_id']): ?>
-                                <form method="POST" action="/comment/delete/<?php echo $comment['id']; ?>" style="display: inline;" onsubmit="return confirm('¿Eliminar este comentario?');">
-                                    <button type="submit" class="btn btn-danger btn-sm">🗑️</button>
-                                </form>
-                            <?php endif; ?>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <?php if (Session::isLoggedIn() && Session::getUserId() == $comment['user_id']): ?>
+                                    <form method="POST" action="/comment/delete/<?php echo $comment['id']; ?>" style="display: inline;" onsubmit="return confirm('¿Eliminar este comentario?');">
+                                        <button type="submit" class="btn btn-danger btn-sm">🗑️</button>
+                                    </form>
+                                <?php endif; ?>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="openReportModalPublic('comment', <?php echo $comment['id']; ?>)">⚠️ Reportar</button>
+                            </div>
                         </div>
                         <div class="comment-content">
                             <?php echo nl2br(htmlspecialchars($comment['content'])); ?>
@@ -166,4 +169,48 @@
 </article>
 
 <script src="/assets/js/main.js"></script>
+<!-- Modal público para reportar -->
+<div id="reportModalPublic" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" type="button" onclick="closeReportModalPublic()" title="Cerrar">&times;</button>
+        <h2>Reportar contenido</h2>
+        <form method="POST" action="/report" id="reportPublicForm">
+            <input type="hidden" name="reported_type" id="reportedType">
+            <input type="hidden" name="reported_id" id="reportedId">
+            <div class="form-group">
+                <label for="reason">Razón:</label>
+                <textarea name="reason" id="reportReason" rows="5" required></textarea>
+            </div>
+            <div style="display:flex; gap:1rem; margin-top:1rem;">
+                <button type="submit" class="btn btn-primary">Enviar reporte</button>
+                <button type="button" class="btn btn-secondary" onclick="closeReportModalPublic()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function openReportModalPublic(type, id) {
+    document.getElementById('reportedType').value = type;
+    document.getElementById('reportedId').value = id;
+    document.getElementById('reportReason').value = '';
+    document.getElementById('reportModalPublic').style.display = 'flex';
+}
+
+function closeReportModalPublic() {
+    document.getElementById('reportModalPublic').style.display = 'none';
+}
+
+// Cerrar modal al hacer clic fuera de él
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('reportModalPublic');
+    if (modal) {
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeReportModalPublic();
+            }
+        });
+    }
+});
+</script>
 <?php include __DIR__ . '/../layouts/footer.php'; ?>

@@ -25,11 +25,33 @@
                 <?php if (Session::isLoggedIn()): ?>
                     <a href="/post/create" class="btn btn-primary btn-sm">✍️ Crear Post</a>
                     <a href="/bookmarks">📑 Guardados</a>
+                    
+                    <!-- Notificaciones -->
+                    <a href="/notifications" style="position: relative;">
+                        🔔
+                        <?php 
+                        $notifModel = new Notification();
+                        $unreadCount = $notifModel->getUnreadCount(Session::getUserId());
+                        if ($unreadCount > 0): 
+                        ?>
+                            <span style="position: absolute; top: -8px; right: -8px; background: #ef4444; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;">
+                                <?php echo $unreadCount > 9 ? '9+' : $unreadCount; ?>
+                            </span>
+                        <?php endif; ?>
+                    </a>
+                    
+                    <?php
+                    // Verificar si es admin o moderador - CORREGIDO
+                    $userModel = new User();
+                    $currentUser = $userModel->findById(Session::getUserId());
+                    if ($currentUser && isset($currentUser['role']) && in_array($currentUser['role'], ['admin', 'moderator'])): 
+                    ?>
+                        <a href="/admin" class="btn btn-sm" style="background: var(--gradient);">⚡ Admin</a>
+                    <?php endif; ?>
+                    
                     <a href="/profile/<?php echo htmlspecialchars(Session::getUsername()); ?>" class="user-info">
                         <?php 
-                        $userModel = new User();
-                        $currentUser = $userModel->findById(Session::getUserId());
-                        if ($currentUser && $currentUser['avatar']): 
+                        if ($currentUser && isset($currentUser['avatar']) && $currentUser['avatar']): 
                         ?>
                             <img src="/<?php echo htmlspecialchars($currentUser['avatar']); ?>" alt="Avatar" class="user-avatar">
                         <?php else: ?>

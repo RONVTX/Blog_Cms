@@ -18,6 +18,13 @@ class Comment {
         return $stmt->fetchAll();
     }
 
+    public function findById($id) {
+        $sql = "SELECT * FROM comments WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+
     public function create($postId, $userId, $content) {
         $sql = "INSERT INTO comments (post_id, user_id, content, created_at) VALUES (?, ?, ?, NOW())";
         $stmt = $this->db->prepare($sql);
