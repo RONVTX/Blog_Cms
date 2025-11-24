@@ -54,6 +54,9 @@ Router::get('/blog/{slug}', 'PostController', 'show');
 Router::get('/category/{slug}', 'CategoryController', 'show');
 Router::get('/tag/{slug}', 'TagController', 'show');
 Router::get('/search', 'SearchController', 'index');
+// Cookies preferences
+Router::get('/cookies', 'CookieController', 'show');
+Router::post('/cookies', 'CookieController', 'update');
 
 // Rutas protegidas
 Router::get('/logout', 'AuthController', 'logout', 'AuthMiddleware');

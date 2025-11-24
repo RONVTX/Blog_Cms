@@ -8,6 +8,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <?php
+    // Only load analytics when the user has accepted cookies.
+    $cookieConsent = null;
+    if (class_exists('Cookie')) {
+        $cookieConsent = Cookie::get('cookie_consent');
+    } else {
+        $cookieConsent = isset($_COOKIE['cookie_consent']) ? $_COOKIE['cookie_consent'] : null;
+    }
+    if ($cookieConsent === 'accepted'):
+    ?>
+    <!-- Analytics: replace GA_MEASUREMENT_ID with your ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID', { 'anonymize_ip': true });
+    </script>
+    <?php endif; ?>
 </head>
 <body>
     <nav class="navbar">
