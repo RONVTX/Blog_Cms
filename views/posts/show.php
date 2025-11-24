@@ -30,13 +30,13 @@
                         </span>
                     <?php endif; ?>
                     <div>
-                        <div style="font-weight: 600;"><?php echo htmlspecialchars($post['username']); ?></div>
+                            <div style="font-weight: 600;"><?php echo htmlspecialchars($post['username']); ?></div>
                         <div style="font-size: 0.875rem; opacity: 0.9;">
-                            📅 <?php echo date('d/m/Y H:i', strtotime($post['created_at'])); ?>
+                            <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg> <?php echo date('d/m/Y H:i', strtotime($post['created_at'])); ?>
                         </div>
                     </div>
                 </a>
-                <span>👁️ <?php echo $post['views']; ?> vistas</span>
+                <span><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#eye"></use></svg> <?php echo $post['views']; ?> vistas</span>
             </div>
         </div>
     </div>
@@ -51,23 +51,23 @@
         <button 
             class="interaction-btn <?php echo $hasLiked ? 'active' : ''; ?>" 
             onclick="toggleLike(<?php echo $post['id']; ?>, this)">
-            <?php echo $hasLiked ? '❤️' : '🤍'; ?> 
+            <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg>
             <span class="like-count"><?php echo $post['likes_count']; ?></span> Me gusta
         </button>
         
         <button class="interaction-btn" onclick="document.getElementById('comment-form').scrollIntoView({behavior: 'smooth'})">
-            💬 <?php echo $post['comments_count']; ?> Comentarios
+            <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> <?php echo $post['comments_count']; ?> Comentarios
         </button>
         
         <button 
             class="interaction-btn <?php echo $hasBookmarked ? 'active' : ''; ?>" 
             onclick="toggleBookmark(<?php echo $post['id']; ?>, this)">
-            <?php echo $hasBookmarked ? '🔖' : '📑'; ?> 
+            <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#bookmark"></use></svg>
             <?php echo $hasBookmarked ? 'Guardado' : 'Guardar'; ?>
         </button>
         
         <button class="interaction-btn" onclick="sharePost('<?php echo addslashes($post['title']); ?>', window.location.href)">
-            🔗 Compartir
+            <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#share"></use></svg> Compartir
         </button>
     </div>
 
@@ -78,16 +78,16 @@
     </div>
 
     <?php if (Session::isLoggedIn() && Session::getUserId() == $post['user_id']): ?>
-        <div style="padding: 1.5rem 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem;">
-            <a href="/post/edit/<?php echo $post['id']; ?>" class="btn btn-primary">✏️ Editar</a>
+            <div style="padding: 1.5rem 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem;">
+            <a href="/post/edit/<?php echo $post['id']; ?>" class="btn btn-primary"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#edit"></use></svg> Editar</a>
             <form method="POST" action="/post/delete/<?php echo $post['id']; ?>" style="display: inline;" onsubmit="return confirm('¿Estás seguro de eliminar esta publicación?');">
-                <button type="submit" class="btn btn-danger">🗑️ Eliminar</button>
+                <button type="submit" class="btn btn-danger-outline btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg> Eliminar</button>
             </form>
         </div>
     <?php endif; ?>
     
     <div class="comments-section">
-        <h3>💬 Comentarios (<?php echo count($comments); ?>)</h3>
+        <h3><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> Comentarios (<?php echo count($comments); ?>)</h3>
         
         <?php if (Session::isLoggedIn()): ?>
             <form id="comment-form" class="comment-form" onsubmit="event.preventDefault(); submitComment(<?php echo $post['id']; ?>);">
@@ -96,7 +96,7 @@
                     placeholder="Escribe tu comentario..." 
                     required></textarea>
                 <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
-                    💬 Comentar
+                    <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> Comentar
                 </button>
             </form>
         <?php else: ?>
@@ -106,9 +106,9 @@
             </div>
         <?php endif; ?>
         
-        <?php if (empty($comments)): ?>
+                <?php if (empty($comments)): ?>
             <div style="text-align: center; padding: 3rem; color: var(--text-light);">
-                <p style="font-size: 2rem;">💭</p>
+                <p style="font-size: 2rem;"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg></p>
                 <p>Aún no hay comentarios. ¡Sé el primero en comentar!</p>
             </div>
         <?php else: ?>
@@ -148,10 +148,10 @@
                             <div style="display: flex; gap: 0.5rem;">
                                 <?php if (Session::isLoggedIn() && Session::getUserId() == $comment['user_id']): ?>
                                     <form method="POST" action="/comment/delete/<?php echo $comment['id']; ?>" style="display: inline;" onsubmit="return confirm('¿Eliminar este comentario?');">
-                                        <button type="submit" class="btn btn-danger btn-sm">🗑️</button>
+                                        <button type="submit" class="btn btn-danger-outline btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg></button>
                                     </form>
                                 <?php endif; ?>
-                                <button type="button" class="btn btn-outline btn-sm" onclick="openReportModalPublic('comment', <?php echo $comment['id']; ?>)">⚠️ Reportar</button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="openReportModalPublic('comment', <?php echo $comment['id']; ?>)"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#flag"></use></svg> Reportar</button>
                             </div>
                         </div>
                         <div class="comment-content">

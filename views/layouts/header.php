@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Font Awesome removed: using local SVG sprite for icons -->
     <?php
     // Only load analytics when the user has accepted cookies.
     $cookieConsent = null;
@@ -35,19 +36,19 @@
             
             <form action="/search" method="GET" class="search-bar">
                 <input type="text" name="q" placeholder="Buscar..." value="<?php echo htmlspecialchars($_GET['q'] ?? ''); ?>">
-                <button type="submit">🔍</button>
+                <button type="submit" aria-label="Buscar"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#search"></use></svg><span class="sr-only">Buscar</span></button>
             </form>
             
             <div class="nav-links">
                 <a href="/">Inicio</a>
                 
                 <?php if (Session::isLoggedIn()): ?>
-                    <a href="/post/create" class="btn btn-primary btn-sm">✍️ Crear Post</a>
-                    <a href="/bookmarks">📑 Guardados</a>
+                    <a href="/post/create" class="btn btn-primary btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#edit"></use></svg> Crear Post</a>
+                    <a href="/bookmarks"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#bookmark"></use></svg> Guardados</a>
                     
                     <!-- Notificaciones -->
                     <a href="/notifications" style="position: relative;">
-                        🔔
+                        <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#bell"></use></svg>
                         <?php 
                         $notifModel = new Notification();
                         $unreadCount = $notifModel->getUnreadCount(Session::getUserId());
@@ -65,7 +66,7 @@
                     $currentUser = $userModel->findById(Session::getUserId());
                     if ($currentUser && isset($currentUser['role']) && in_array($currentUser['role'], ['admin', 'moderator'])): 
                     ?>
-                        <a href="/admin" class="btn btn-sm" style="background: var(--gradient);">⚡ Admin</a>
+                        <a href="/admin" class="btn btn-sm" style="background: var(--gradient);"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#cog"></use></svg> Admin</a>
                     <?php endif; ?>
                     
                     <a href="/profile/<?php echo htmlspecialchars(Session::getUsername()); ?>" class="user-info">
@@ -80,7 +81,7 @@
                         <?php endif; ?>
                         <span><?php echo htmlspecialchars(Session::getUsername()); ?></span>
                     </a>
-                    <a href="/logout" class="btn btn-danger btn-sm">Salir</a>
+                    <a href="/logout" class="btn btn-danger btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#sign-out"></use></svg> Salir</a>
                 <?php else: ?>
                     <a href="/login" class="btn btn-outline btn-sm">Iniciar Sesión</a>
                     <a href="/register" class="btn btn-primary btn-sm">Registrarse</a>

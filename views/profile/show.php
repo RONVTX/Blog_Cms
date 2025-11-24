@@ -54,7 +54,7 @@ if (Session::isLoggedIn()) {
                 <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
                     <?php if (Session::isLoggedIn() && Session::getUserId() == $user['id']): ?>
                         <a href="/profile/edit" class="btn" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
-                            ✏️ Editar Perfil
+                            <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#edit"></use></svg> Editar Perfil
                         </a>
                     <?php elseif (Session::isLoggedIn()): ?>
                         <button 
@@ -65,7 +65,7 @@ if (Session::isLoggedIn()) {
                             <?php echo $isFollowing ? '✓ Siguiendo' : '+ Seguir'; ?>
                         </button>
                         <button class="btn" onclick="openReportModalPublic('user', <?php echo $user['id']; ?>)" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
-                            ⚠️ Reportar
+                            <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#flag"></use></svg> Reportar
                         </button>
                     <?php endif; ?>
                 </div>
@@ -75,11 +75,11 @@ if (Session::isLoggedIn()) {
 </div>
 
 <div class="container" style="margin-top: 3rem;">
-    <h2 style="margin-bottom: 2rem;">📝 Publicaciones de <?php echo htmlspecialchars($user['username']); ?></h2>
+    <h2 style="margin-bottom: 2rem;"><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg> Publicaciones de <?php echo htmlspecialchars($user['username']); ?></h2>
     
     <?php if (empty($posts)): ?>
         <div class="empty-state" style="text-align: center; padding: 4rem 2rem;">
-            <p style="font-size: 3rem;">📝</p>
+            <p style="font-size: 3rem;"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg></p>
             <p style="color: var(--text-light);">Este usuario aún no ha publicado nada</p>
         </div>
     <?php else: ?>
@@ -109,8 +109,8 @@ if (Session::isLoggedIn()) {
                         
                         <div class="post-footer">
                             <div class="post-stats">
-                                <span class="post-stat">❤️ <?php echo $post['likes_count']; ?></span>
-                                <span class="post-stat">💬 <?php echo $post['comments_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg> <?php echo $post['likes_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> <?php echo $post['comments_count']; ?></span>
                             </div>
                             <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-sm btn-primary">
                                 Leer más →

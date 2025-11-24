@@ -7,7 +7,7 @@
             🏷️ <?php echo htmlspecialchars($tag); ?>
         </h1>
         <p style="margin-top: 1rem; opacity: 0.8;">
-            📝 <?php echo count($posts); ?> publicaciones con este tag
+            <svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg> <?php echo count($posts); ?> publicaciones con este tag
         </p>
     </div>
 </div>
@@ -52,8 +52,8 @@
                         
                         <div class="post-footer">
                             <div class="post-stats">
-                                <span class="post-stat">❤️ <?php echo $post['likes_count']; ?></span>
-                                <span class="post-stat">💬 <?php echo $post['comments_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg> <?php echo $post['likes_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> <?php echo $post['comments_count']; ?></span>
                             </div>
                             <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-sm btn-primary">
                                 Leer más →

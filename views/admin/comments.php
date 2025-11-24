@@ -2,7 +2,7 @@
 <?php include __DIR__ . '/../layouts/admin-header.php'; ?>
 
 <div class="admin-header">
-    <h1>💬 Gestión de Comentarios</h1>
+    <h1><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> Gestión de Comentarios</h1>
     <p>Modera los comentarios del blog</p>
 </div>
 
@@ -60,7 +60,7 @@
                     <td>
                         <form method="POST" action="/admin/comments/delete" style="display: inline;" onsubmit="return confirm('¿Eliminar este comentario?');">
                             <input type="hidden" name="comment_id" value="<?php echo $comment['id']; ?>">
-                            <button type="submit" class="action-btn action-btn-danger action-btn-sm">🗑️</button>
+                            <button type="submit" class="action-btn action-btn-danger action-btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg></button>
                         </form>
                     </td>
                 </tr>

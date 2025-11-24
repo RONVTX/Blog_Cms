@@ -4,14 +4,14 @@
 <div style="background: var(--gradient); color: white; padding: 3rem 0; border-radius: 16px; margin-bottom: 3rem;">
     <div class="container">
         <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">
-            🔍 Resultados de búsqueda
+            <svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#search"></use></svg> Resultados de búsqueda
         </h1>
         <?php if (!empty($query)): ?>
             <p style="opacity: 0.9; font-size: 1.125rem;">
                 Buscando: "<?php echo htmlspecialchars($query); ?>"
             </p>
             <p style="margin-top: 1rem; opacity: 0.8;">
-                📝 <?php echo count($posts); ?> resultados encontrados
+                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg> <?php echo count($posts); ?> resultados encontrados
             </p>
         <?php endif; ?>
     </div>
@@ -20,7 +20,7 @@
 <div class="container">
     <?php if (empty($query)): ?>
         <div class="empty-state" style="text-align: center; padding: 4rem 2rem;">
-            <p style="font-size: 3rem;">🔍</p>
+            <p style="font-size: 3rem;"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#search"></use></svg></p>
             <p style="color: var(--text-light);">Usa la barra de búsqueda para encontrar publicaciones</p>
         </div>
     <?php elseif (empty($posts)): ?>
@@ -61,8 +61,8 @@
                         
                         <div class="post-footer">
                             <div class="post-stats">
-                                <span class="post-stat">❤️ <?php echo $post['likes_count']; ?></span>
-                                <span class="post-stat">💬 <?php echo $post['comments_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg> <?php echo $post['likes_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> <?php echo $post['comments_count']; ?></span>
                             </div>
                             <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-sm btn-primary">
                                 Leer más →

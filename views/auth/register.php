@@ -203,7 +203,7 @@
         
         <?php if (isset($error)): ?>
             <div class="alert alert-error">
-                <i class="fas fa-exclamation-circle"></i>
+                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#exclamation-circle"></use></svg>
                 <?php echo htmlspecialchars($error); ?>
             </div>
         <?php endif; ?>
@@ -211,7 +211,7 @@
         <form method="POST" action="/register" class="form">
             <div class="form-group">
                 <label for="username">
-                    <i class="fas fa-user"></i> Nombre de Usuario
+                    <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#user"></use></svg> Nombre de Usuario
                 </label>
                 <input type="text" id="username" name="username" required 
                        placeholder="👤 Ingresa tu nombre de usuario" minlength="3">
@@ -219,7 +219,7 @@
 
             <div class="form-group">
                 <label for="email">
-                    <i class="fas fa-envelope"></i> Correo Electrónico
+                    <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#envelope"></use></svg> Correo Electrónico
                 </label>
                 <input type="email" id="email" name="email" required 
                        placeholder="📧 Ingresa tu correo electrónico">
@@ -227,21 +227,21 @@
 
             <div class="form-group">
                 <label for="password">
-                    <i class="fas fa-lock"></i> Contraseña
+                    <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#lock"></use></svg> Contraseña
                 </label>
                 <input type="password" id="password" name="password" required 
-                       placeholder="🔒 Ingresa tu contraseña (mínimo 8 caracteres)" minlength="8">
+                       placeholder="Ingresa tu contraseña (mínimo 8 caracteres)" minlength="8">
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <i class="fas fa-user-plus"></i> Registrarse
+                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#user-plus"></use></svg> Registrarse
             </button>
         </form>
 
         <p class="form-footer">
             ¿Ya tienes cuenta? 
             <a href="/login">
-                <i class="fas fa-sign-in-alt"></i> Inicia sesión aquí
+                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#sign-in"></use></svg> Inicia sesión aquí
             </a>
         </p>
     </div>

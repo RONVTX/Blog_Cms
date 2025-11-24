@@ -4,7 +4,7 @@
 <div style="background: var(--gradient); color: white; padding: 3rem 0; border-radius: 16px; margin-bottom: 3rem;">
     <div class="container">
         <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">
-            🔖 Mis Marcadores
+                <svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#bookmark"></use></svg> Mis Marcadores
         </h1>
         <p style="opacity: 0.9; font-size: 1.125rem;">
             Publicaciones que has guardado para leer más tarde
@@ -15,7 +15,7 @@
 <div class="container">
     <?php if (empty($posts)): ?>
         <div class="empty-state" style="text-align: center; padding: 4rem 2rem;">
-            <p style="font-size: 3rem;">📑</p>
+                <p style="font-size: 3rem;"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#bookmark"></use></svg></p>
             <p style="color: var(--text-light); margin-bottom: 1.5rem;">
                 No has guardado ninguna publicación todavía
             </p>
@@ -51,8 +51,8 @@
                         
                         <div class="post-footer">
                             <div class="post-stats">
-                                <span class="post-stat">❤️ <?php echo $post['likes_count']; ?></span>
-                                <span class="post-stat">💬 <?php echo $post['comments_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg> <?php echo $post['likes_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> <?php echo $post['comments_count']; ?></span>
                             </div>
                             <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-sm btn-primary">
                                 Leer más →

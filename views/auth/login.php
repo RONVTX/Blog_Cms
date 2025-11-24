@@ -203,7 +203,7 @@
         
         <?php if (isset($error)): ?>
             <div class="alert alert-error">
-                <i class="fas fa-exclamation-circle"></i>
+                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#exclamation-circle"></use></svg>
                 <?php echo htmlspecialchars($error); ?>
             </div>
         <?php endif; ?>
@@ -211,7 +211,7 @@
         <form method="POST" action="/login" class="form">
             <div class="form-group">
                 <label for="email">
-                    <i class="fas fa-envelope"></i> Correo Electrónico
+                    <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#envelope"></use></svg> Correo Electrónico
                 </label>
                 <input type="email" id="email" name="email" required 
                        placeholder="📧 Ingresa tu correo electrónico">
@@ -219,21 +219,21 @@
 
             <div class="form-group">
                 <label for="password">
-                    <i class="fas fa-lock"></i> Contraseña
+                    <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#lock"></use></svg> Contraseña
                 </label>
                 <input type="password" id="password" name="password" required 
-                       placeholder="🔒 Ingresa tu contraseña">
+                       placeholder="Ingresa tu contraseña">
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#sign-in"></use></svg> Iniciar Sesión
             </button>
         </form>
 
         <p class="form-footer">
             ¿No tienes cuenta? 
             <a href="/register">
-                <i class="fas fa-user-plus"></i> Regístrate aquí
+                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#user-plus"></use></svg> Regístrate aquí
             </a>
         </p>
     </div>

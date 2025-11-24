@@ -2,7 +2,7 @@
 <?php include __DIR__ . '/../layouts/admin-header.php'; ?>
 
 <div class="admin-header">
-    <h1>⚠️ Gestión de Reportes</h1>
+    <h1><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#flag"></use></svg> Gestión de Reportes</h1>
     <p>Revisa y gestiona los reportes de usuarios</p>
 </div>
 
@@ -63,7 +63,7 @@
                     <td><?php echo htmlspecialchars($report['reporter_username']); ?></td>
                     <td>
                         <span class="status-badge">
-                            <?php echo $report['reported_type'] === 'post' ? '📝 Post' : ($report['reported_type'] === 'comment' ? '💬 Comentario' : '👤 Usuario'); ?>
+                            <?php echo $report['reported_type'] === 'post' ? '<svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg> Post' : ($report['reported_type'] === 'comment' ? '<svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> Comentario' : '<svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#user"></use></svg> Usuario'); ?>
                         </span>
                     </td>
                     <td><?php echo htmlspecialchars(substr($report['reason'], 0, 100)); ?>...</td>
@@ -85,7 +85,7 @@
                             data-reporter="<?php echo htmlspecialchars($report['reporter_username'], ENT_QUOTES); ?>"
                             data-status="<?php echo $report['status']; ?>"
                         >
-                            👁️ Ver
+                                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#eye"></use></svg> Ver
                         </button>
                     </td>
                 </tr>

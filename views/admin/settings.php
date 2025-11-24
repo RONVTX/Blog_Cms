@@ -2,7 +2,7 @@
 <?php include __DIR__ . '/../layouts/admin-header.php'; ?>
 
 <div class="admin-header">
-    <h1>⚙️ Configuración del Sitio</h1>
+    <h1><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#cog"></use></svg> Configuración del Sitio</h1>
     <p>Ajusta la configuración general del blog</p>
 </div>
 

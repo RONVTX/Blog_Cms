@@ -4,10 +4,10 @@
 <div class="admin-header">
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>
-            <h1>📚 Gestión de Categorías</h1>
+            <h1><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#folder"></use></svg> Gestión de Categorías</h1>
             <p>Organiza el contenido del blog</p>
         </div>
-        <a href="/admin/categories/create" class="action-btn action-btn-primary">➕ Nueva Categoría</a>
+        <a href="/admin/categories/create" class="action-btn action-btn-primary"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#plus-circle"></use></svg> Nueva Categoría</a>
     </div>
 </div>
 
@@ -30,7 +30,23 @@
                 <?php foreach ($categories as $category): ?>
                 <tr>
                     <td><?php echo $category['id']; ?></td>
-                    <td style="font-size: 1.5rem;"><?php echo htmlspecialchars($category['icon'] ?? '📁'); ?></td>
+                    <td>
+                        <?php 
+                        // Map common category emojis to SVG icons
+                        $iconMap = [
+                            '🚀' => 'star',
+                            '💼' => 'folder',
+                            '🎨' => 'folder',
+                            '📚' => 'newspaper',
+                            '🏃' => 'star',
+                            '💻' => 'cog',
+                            '📁' => 'folder'
+                        ];
+                        $categoryIcon = $category['icon'] ?? '📁';
+                        $svgIcon = $iconMap[$categoryIcon] ?? 'folder';
+                        ?>
+                        <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#<?php echo $svgIcon; ?>"></use></svg>
+                    </td>
                     <td><?php echo htmlspecialchars($category['name']); ?></td>
                     <td><?php echo htmlspecialchars($category['slug']); ?></td>
                     <td><?php echo htmlspecialchars(substr($category['description'] ?? '', 0, 50)); ?>...</td>
@@ -40,7 +56,7 @@
                     </td>
                     <td>
                         <div class="admin-actions">
-                            <a href="/category/<?php echo htmlspecialchars($category['slug']); ?>" target="_blank" class="action-btn action-btn-primary action-btn-sm">👁️</a>
+                            <a href="/category/<?php echo htmlspecialchars($category['slug']); ?>" target="_blank" class="action-btn action-btn-primary action-btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#eye"></use></svg></a>
                         </div>
                     </td>
                 </tr>

@@ -25,9 +25,9 @@
                         <div class="trending-info">
                             <h4><?php echo htmlspecialchars($post['title']); ?></h4>
                             <div class="trending-meta">
-                                ❤️ <?php echo $post['likes_count']; ?> · 
-                                💬 <?php echo $post['comments_count']; ?> · 
-                                👁️ <?php echo $post['views']; ?>
+                                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg> <?php echo $post['likes_count']; ?> · 
+                                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> <?php echo $post['comments_count']; ?> · 
+                                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#eye"></use></svg> <?php echo $post['views']; ?>
                             </div>
                         </div>
                     </a>
@@ -38,13 +38,14 @@
     </aside>
     
     <div>
-        <h1 style="margin-bottom: 2rem; font-size: 2.5rem; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            ✨ Últimas Publicaciones
+            <h1 style="margin-bottom: 2rem; font-size: 2.5rem; background: var(--gradient); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            <svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#star"></use></svg> Últimas Publicaciones
         </h1>
         
         <?php if (empty($posts)): ?>
             <div class="empty-state" style="text-align: center; padding: 4rem 2rem;">
-                <h2 style="font-size: 3rem; margin-bottom: 1rem;">📝</h2>
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;"><i class="fas fa-newspaper" aria-hidden="true"></i></h2>
+                    <h2 style="font-size: 3rem; margin-bottom: 1rem;"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg></h2>
                 <p style="font-size: 1.25rem; color: var(--text-light); margin-bottom: 1.5rem;">
                     No hay publicaciones todavía.
                 </p>
@@ -94,7 +95,7 @@
                                     <?php endif; ?>
                                     <span><?php echo htmlspecialchars($post['username']); ?></span>
                                 </a>
-                                <span>📅 <?php echo date('d/m/Y', strtotime($post['created_at'])); ?></span>
+                                <span><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg> <?php echo date('d/m/Y', strtotime($post['created_at'])); ?></span>
                             </div>
                             
                             <p class="post-excerpt">
@@ -103,9 +104,9 @@
                             
                             <div class="post-footer">
                                 <div class="post-stats">
-                                    <span class="post-stat">❤️ <?php echo $post['likes_count']; ?></span>
-                                    <span class="post-stat">💬 <?php echo $post['comments_count']; ?></span>
-                                    <span class="post-stat">👁️ <?php echo $post['views']; ?></span>
+                                    <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg> <?php echo $post['likes_count']; ?></span>
+                                        <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> <?php echo $post['comments_count']; ?></span>
+                                        <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#eye"></use></svg> <?php echo $post['views']; ?></span>
                                 </div>
                                 <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-sm btn-primary">
                                     Leer más →

@@ -93,5 +93,6 @@
     </script>
 
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/icons-replace.js"></script>
 </body>
 </html>

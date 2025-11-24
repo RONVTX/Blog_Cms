@@ -2,11 +2,11 @@
 <?php include __DIR__ . '/../layouts/header.php'; ?>
 
 <div class="form-container">
-    <h1 style="margin-bottom: 0.5rem;">✏️ Editar Perfil</h1>
+    <h1 style="margin-bottom: 0.5rem;"><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#edit"></use></svg> Editar Perfil</h1>
     <p style="color: var(--text-light); margin-bottom: 2rem;">Actualiza tu información personal</p>
     
     <?php if (isset($error)): ?>
-        <div class="alert alert-error">❌ <?php echo htmlspecialchars($error); ?></div>
+        <div class="alert alert-error"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg> <?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
 
     <form method="POST" action="/profile/update" enctype="multipart/form-data" class="form">
@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-group">
-            <label for="bio">📝 Biografía:</label>
+            <label for="bio"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg> Biografía:</label>
             <textarea id="bio" 
                       name="bio" 
                       rows="4" 
@@ -43,7 +43,7 @@
 
         <div class="form-actions" style="display: flex; gap: 1rem; margin-top: 2rem;">
             <button type="submit" class="btn btn-primary">💾 Guardar Cambios</button>
-            <a href="/profile/<?php echo htmlspecialchars($user['username']); ?>" class="btn btn-secondary">❌ Cancelar</a>
+            <a href="/profile/<?php echo htmlspecialchars($user['username']); ?>" class="btn btn-secondary"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg> Cancelar</a>
         </div>
     </form>
 </div>

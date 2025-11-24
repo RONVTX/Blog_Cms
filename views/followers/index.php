@@ -3,13 +3,13 @@
 
 <div class="container" style="max-width: 800px; margin-top: 2rem;">
     <h1 style="margin-bottom: 2rem;">
-        <?php echo $type === 'followers' ? '👥 Seguidores' : '🔗 Siguiendo'; ?> 
+        <?php echo $type === 'followers' ? '<i class="fas fa-users" aria-hidden="true"></i> Seguidores' : '<i class="fas fa-link" aria-hidden="true"></i> Siguiendo'; ?> 
         de <?php echo htmlspecialchars($user['username']); ?>
     </h1>
     
     <?php if (empty($followers)): ?>
         <div class="empty-state" style="text-align: center; padding: 4rem 2rem;">
-            <p style="font-size: 3rem;">👥</p>
+            <p style="font-size: 3rem;"><i class="fas fa-users" aria-hidden="true"></i></p>
             <p style="color: var(--text-light);">
                 <?php echo $type === 'followers' ? 'Este usuario aún no tiene seguidores' : 'Este usuario no sigue a nadie aún'; ?>
             </p>

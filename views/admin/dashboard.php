@@ -2,14 +2,14 @@
 <?php include __DIR__ . '/../layouts/admin-header.php'; ?>
 
 <div class="admin-header">
-    <h1>📊 Dashboard</h1>
+    <h1><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#home"></use></svg> Dashboard</h1>
     <p>Resumen general del sistema</p>
 </div>
 
 <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-            👥
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#users"></use></svg>
         </div>
         <div class="stat-info">
             <h3><?php echo number_format($stats['total_users']); ?></h3>
@@ -20,7 +20,7 @@
 
     <div class="stat-card">
         <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-            📝
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg>
         </div>
         <div class="stat-info">
             <h3><?php echo number_format($stats['total_posts']); ?></h3>
@@ -31,7 +31,7 @@
 
     <div class="stat-card">
         <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-            💬
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg>
         </div>
         <div class="stat-info">
             <h3><?php echo number_format($stats['total_comments']); ?></h3>
@@ -44,7 +44,7 @@
 
     <div class="stat-card">
         <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-            👁️
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#eye"></use></svg>
         </div>
         <div class="stat-info">
             <h3><?php echo number_format($stats['total_views']); ?></h3>
@@ -55,7 +55,7 @@
     <?php if ($stats['pending_reports'] > 0): ?>
     <div class="stat-card alert">
         <div class="stat-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);">
-            ⚠️
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#flag"></use></svg>
         </div>
         <div class="stat-info">
             <h3><?php echo $stats['pending_reports']; ?></h3>
@@ -67,7 +67,7 @@
 
     <div class="stat-card">
         <div class="stat-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-            📄
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#bookmark"></use></svg>
         </div>
         <div class="stat-info">
             <h3><?php echo $stats['draft_posts']; ?></h3>
@@ -79,7 +79,7 @@
 <div class="admin-row">
     <div class="admin-col-8">
         <div class="admin-card">
-            <h2>🔥 Posts Más Populares</h2>
+            <h2><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#star"></use></svg> Posts Más Populares</h2>
             <div class="table-responsive">
                 <table class="admin-table">
                     <thead>
@@ -113,11 +113,11 @@
 
     <div class="admin-col-4">
         <div class="admin-card">
-            <h2>📋 Actividad Reciente</h2>
+            <h2><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#bell"></use></svg> Actividad Reciente</h2>
             <div class="activity-list">
                 <?php foreach ($recentActivity as $activity): ?>
                 <div class="activity-item">
-                    <div class="activity-icon">📌</div>
+                    <div class="activity-icon"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#bookmark"></use></svg></div>
                     <div class="activity-content">
                         <p><?php echo htmlspecialchars($activity['description']); ?></p>
                         <span class="activity-time">

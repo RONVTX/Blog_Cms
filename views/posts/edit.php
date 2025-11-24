@@ -2,16 +2,16 @@
 <?php include __DIR__ . '/../layouts/header.php'; ?>
 
 <div class="form-container" style="max-width: 900px;">
-    <h1 style="margin-bottom: 0.5rem;">✏️ Editar Publicación</h1>
+    <h1 style="margin-bottom: 0.5rem;"><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#edit"></use></svg> Editar Publicación</h1>
     <p style="color: var(--text-light); margin-bottom: 2rem;">Actualiza el contenido de tu publicación</p>
     
     <?php if (isset($error)): ?>
-        <div class="alert alert-error">❌ <?php echo htmlspecialchars($error); ?></div>
+        <div class="alert alert-error"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg> <?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
 
     <form method="POST" action="/post/edit/<?php echo $post['id']; ?>" enctype="multipart/form-data" class="form">
         <div class="form-group">
-            <label for="title">📝 Título:</label>
+            <label for="title"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg> Título:</label>
             <input type="text" 
                    id="title" 
                    name="title" 
@@ -29,7 +29,7 @@
         </div>
 
         <div class="form-group">
-            <label>📚 Categorías:</label>
+            <label><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#folder"></use></svg> Categorías:</label>
             <div class="checkbox-group">
                 <?php foreach ($categories as $category): ?>
                     <label class="checkbox-item">
@@ -58,7 +58,7 @@
 
         <div class="form-actions" style="display: flex; gap: 1rem; margin-top: 2rem;">
             <button type="submit" class="btn btn-primary">💾 Actualizar</button>
-            <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-secondary">❌ Cancelar</a>
+            <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-secondary"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg> Cancelar</a>
         </div>
     </form>
 </div>

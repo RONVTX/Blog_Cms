@@ -12,7 +12,7 @@
             </p>
         <?php endif; ?>
         <p style="margin-top: 1rem; opacity: 0.8;">
-            📝 <?php echo count($posts); ?> publicaciones
+            <svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg> <?php echo count($posts); ?> publicaciones
         </p>
     </div>
 </div>
@@ -20,7 +20,7 @@
 <div class="container">
     <?php if (empty($posts)): ?>
         <div class="empty-state" style="text-align: center; padding: 4rem 2rem;">
-            <p style="font-size: 3rem;">📝</p>
+            <p style="font-size: 3rem;"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg></p>
             <p style="color: var(--text-light);">No hay publicaciones en esta categoría todavía</p>
             <a href="/" class="btn btn-primary" style="margin-top: 1.5rem;">Explorar Publicaciones</a>
         </div>
@@ -54,8 +54,8 @@
                         
                         <div class="post-footer">
                             <div class="post-stats">
-                                <span class="post-stat">❤️ <?php echo $post['likes_count']; ?></span>
-                                <span class="post-stat">💬 <?php echo $post['comments_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg> <?php echo $post['likes_count']; ?></span>
+                                <span class="post-stat"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#comments"></use></svg> <?php echo $post['comments_count']; ?></span>
                             </div>
                             <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-sm btn-primary">
                                 Leer más →

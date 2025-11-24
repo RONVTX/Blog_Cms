@@ -2,7 +2,7 @@
 <?php include __DIR__ . '/../layouts/admin-header.php'; ?>
 
 <div class="admin-header">
-    <h1>📝 Gestión de Publicaciones</h1>
+    <h1><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg> Gestión de Publicaciones</h1>
     <p>Administra todas las publicaciones del blog</p>
 </div>
 
@@ -62,7 +62,7 @@
                         <form method="POST" action="/admin/posts/featured" style="display: inline;">
                             <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
                             <button type="submit" class="action-btn-sm <?php echo $post['featured'] ? 'action-btn-success' : ''; ?>">
-                                <?php echo $post['featured'] ? '⭐' : '☆'; ?>
+                                <svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#star"></use></svg>
                             </button>
                         </form>
                     </td>
@@ -72,10 +72,10 @@
                     <td><?php echo date('d/m/Y', strtotime($post['created_at'])); ?></td>
                     <td>
                         <div class="admin-actions">
-                            <a href="/post/edit/<?php echo $post['id']; ?>" class="action-btn action-btn-primary action-btn-sm">✏️</a>
+                            <a href="/post/edit/<?php echo $post['id']; ?>" class="action-btn action-btn-primary action-btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#edit"></use></svg></a>
                             <form method="POST" action="/admin/posts/delete" style="display: inline;" onsubmit="return confirm('¿Eliminar esta publicación?');">
                                 <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
-                                <button type="submit" class="action-btn action-btn-danger action-btn-sm">🗑️</button>
+                                <button type="submit" class="action-btn action-btn-danger action-btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg></button>
                             </form>
                         </div>
                     </td>

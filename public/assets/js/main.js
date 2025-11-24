@@ -1,3 +1,31 @@
+// Delete confirmation modal
+function showDeleteConfirm(message, form) {
+    event.preventDefault();
+    const overlay = document.getElementById('delete-modal-overlay');
+    const modalMessage = document.getElementById('delete-modal-message');
+    const deleteBtn = document.getElementById('delete-modal-confirm');
+    
+    if (!overlay) {
+        console.error('Modal overlay not found');
+        return confirm(message);
+    }
+    
+    modalMessage.textContent = message;
+    overlay.classList.add('active');
+    
+    deleteBtn.onclick = () => {
+        overlay.classList.remove('active');
+        form.submit();
+    };
+    
+    return false;
+}
+
+function closeDeleteModal() {
+    const overlay = document.getElementById('delete-modal-overlay');
+    overlay.classList.remove('active');
+}
+
 // Confirmación de eliminación
 document.addEventListener('DOMContentLoaded', function() {
     // Auto-hide alerts después de 5 segundos
@@ -82,10 +110,22 @@ function toggleLike(postId, button) {
             
             if (data.has_liked) {
                 button.classList.add('active');
-                button.innerHTML = `❤️ <span class="like-count">${data.likes_count}</span> Me gusta`;
+                button.innerHTML = `<i class="fas fa-heart"></i> <span class="like-count">${data.likes_count}</span> Me gusta`;
             } else {
                 button.classList.remove('active');
-                button.innerHTML = `🤍 <span class="like-count">${data.likes_count}</span> Me gusta`;
+                button.innerHTML = `<i class="far fa-heart"></i> <span class="like-count">${data.likes_count}</span> Me gusta`;
+            }
+            // Replace any <i class="fa-..."> placeholders with inline SVG and animate
+            if (window.replaceIcons) {
+                window.replaceIcons(button);
+                // add a pulse animation to the heart svg when liked
+                const svg = button.querySelector('svg.icon');
+                if (svg) {
+                    svg.classList.remove('pulse');
+                    // trigger reflow
+                    void svg.offsetWidth;
+                    if (data.has_liked) svg.classList.add('pulse');
+                }
             }
         } else {
             if (data.message) {
@@ -112,10 +152,19 @@ function toggleBookmark(postId, button) {
         if (data.success) {
             if (data.has_bookmarked) {
                 button.classList.add('active');
-                button.innerHTML = '🔖 Guardado';
+                button.innerHTML = '<i class="fas fa-bookmark"></i> Guardado';
             } else {
                 button.classList.remove('active');
-                button.innerHTML = '📑 Guardar';
+                button.innerHTML = '<i class="far fa-bookmark"></i> Guardar';
+            }
+            if (window.replaceIcons) {
+                window.replaceIcons(button);
+                const svg = button.querySelector('svg.icon');
+                if (svg) {
+                    svg.classList.remove('pulse');
+                    void svg.offsetWidth;
+                    if (data.has_bookmarked) svg.classList.add('pulse');
+                }
             }
         } else {
             if (data.message) {

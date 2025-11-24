@@ -2,7 +2,7 @@
 <?php include __DIR__ . '/../layouts/admin-header.php'; ?>
 
 <div class="admin-header">
-    <h1>👥 Gestión de Usuarios</h1>
+    <h1><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#users"></use></svg> Gestión de Usuarios</h1>
     <p>Administra todos los usuarios del sistema</p>
 </div>
 
@@ -59,7 +59,7 @@
                         <?php if ($user['role'] !== 'admin'): ?>
                         <form method="POST" action="/admin/users/delete" style="display: inline;" onsubmit="return confirm('¿Eliminar este usuario?');">
                             <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
-                            <button type="submit" class="action-btn action-btn-danger action-btn-sm">🗑️</button>
+                            <button type="submit" class="action-btn action-btn-danger action-btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg></button>
                         </form>
                         <?php endif; ?>
                     </td>
