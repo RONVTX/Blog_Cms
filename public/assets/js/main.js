@@ -1,6 +1,5 @@
 // Delete confirmation modal
 function showDeleteConfirm(message, form) {
-    event.preventDefault();
     const overlay = document.getElementById('delete-modal-overlay');
     const modalMessage = document.getElementById('delete-modal-message');
     const deleteBtn = document.getElementById('delete-modal-confirm');

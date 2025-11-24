@@ -80,7 +80,7 @@
     <?php if (Session::isLoggedIn() && Session::getUserId() == $post['user_id']): ?>
             <div style="padding: 1.5rem 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem;">
             <a href="/post/edit/<?php echo $post['id']; ?>" class="btn btn-primary"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#edit"></use></svg> Editar</a>
-            <form method="POST" action="/post/delete/<?php echo $post['id']; ?>" style="display: inline;" onsubmit="return confirm('¿Estás seguro de eliminar esta publicación?');">
+            <form method="POST" action="/post/delete/<?php echo $post['id']; ?>" style="display: inline;" onsubmit="return showDeleteConfirm('¿Estás seguro de eliminar esta publicación?', this);">
                 <button type="submit" class="btn btn-danger-outline btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg> Eliminar</button>
             </form>
         </div>
@@ -147,7 +147,7 @@
                             
                             <div style="display: flex; gap: 0.5rem;">
                                 <?php if (Session::isLoggedIn() && Session::getUserId() == $comment['user_id']): ?>
-                                    <form method="POST" action="/comment/delete/<?php echo $comment['id']; ?>" style="display: inline;" onsubmit="return confirm('¿Eliminar este comentario?');">
+                                    <form method="POST" action="/comment/delete/<?php echo $comment['id']; ?>" style="display: inline;" onsubmit="return showDeleteConfirm('¿Eliminar este comentario?', this);">
                                         <button type="submit" class="btn btn-danger-outline btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg></button>
                                     </form>
                                 <?php endif; ?>

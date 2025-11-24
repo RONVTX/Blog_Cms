@@ -39,12 +39,12 @@
     
     <div>
             <h1 style="margin-bottom: 2rem; font-size: 2.5rem; background: var(--gradient); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            <svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#star"></use></svg> Últimas Publicaciones
+             Últimas Publicaciones
         </h1>
         
         <?php if (empty($posts)): ?>
             <div class="empty-state" style="text-align: center; padding: 4rem 2rem;">
-                <h2 style="font-size: 3rem; margin-bottom: 1rem;"><i class="fas fa-newspaper" aria-hidden="true"></i></h2>
+                
                     <h2 style="font-size: 3rem; margin-bottom: 1rem;"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#newspaper"></use></svg></h2>
                 <p style="font-size: 1.25rem; color: var(--text-light); margin-bottom: 1.5rem;">
                     No hay publicaciones todavía.

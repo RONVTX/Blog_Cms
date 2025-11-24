@@ -58,7 +58,7 @@
                     </td>
                     <td><?php echo date('d/m/Y H:i', strtotime($comment['created_at'])); ?></td>
                     <td>
-                        <form method="POST" action="/admin/comments/delete" style="display: inline;" onsubmit="return confirm('¿Eliminar este comentario?');">
+                        <form method="POST" action="/admin/comments/delete" style="display: inline;" onsubmit="return showDeleteConfirm('¿Eliminar este comentario?', this);">
                             <input type="hidden" name="comment_id" value="<?php echo $comment['id']; ?>">
                             <button type="submit" class="action-btn action-btn-danger action-btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg></button>
                         </form>

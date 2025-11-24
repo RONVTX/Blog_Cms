@@ -73,7 +73,7 @@
                     <td>
                         <div class="admin-actions">
                             <a href="/post/edit/<?php echo $post['id']; ?>" class="action-btn action-btn-primary action-btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#edit"></use></svg></a>
-                            <form method="POST" action="/admin/posts/delete" style="display: inline;" onsubmit="return confirm('¿Eliminar esta publicación?');">
+                            <form method="POST" action="/admin/posts/delete" style="display: inline;" onsubmit="return showDeleteConfirm('¿Eliminar esta publicación?', this);">
                                 <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
                                 <button type="submit" class="action-btn action-btn-danger action-btn-sm"><svg class="icon icon-text" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg></button>
                             </form>

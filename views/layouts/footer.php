@@ -94,5 +94,19 @@
 
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/icons-replace.js"></script>
+    <!-- Delete confirmation modal (global) -->
+    <div id="delete-modal-overlay" class="delete-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="delete-modal" role="document">
+            <div class="delete-modal-icon">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#times-circle"></use></svg>
+            </div>
+            <h3>Confirmar eliminación</h3>
+            <p id="delete-modal-message">¿Estás seguro de eliminar este elemento?</p>
+            <div class="delete-modal-actions">
+                <button type="button" class="btn-cancel btn" onclick="closeDeleteModal()">Cancelar</button>
+                <button id="delete-modal-confirm" type="button" class="btn-delete btn">Eliminar</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
