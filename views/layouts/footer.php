@@ -20,10 +20,10 @@
                 <div class="footer-section">
                     <h4>Síguenos</h4>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-facebook" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-linkedin" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -53,44 +53,8 @@
         </div>
     </div>
 
-    <script>
-    (function() {
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
 
-        function setCookie(name, value, days) {
-            let expires = '';
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days*24*60*60*1000));
-                expires = '; expires=' + date.toUTCString();
-            }
-            document.cookie = name + '=' + (value || '')  + expires + '; path=/; samesite=Lax';
-        }
-
-        var banner = document.getElementById('cookieBanner');
-        var accepted = getCookie('cookie_consent');
-        if (!accepted) {
-            banner.style.display = 'block';
-        }
-
-        var acceptBtn = document.getElementById('cookieAccept');
-        var declineBtn = document.getElementById('cookieDecline');
-
-        if (acceptBtn) acceptBtn.addEventListener('click', function() {
-            setCookie('cookie_consent', 'accepted', 365);
-            banner.style.display = 'none';
-        });
-
-        if (declineBtn) declineBtn.addEventListener('click', function() {
-            setCookie('cookie_consent', 'declined', 365);
-            banner.style.display = 'none';
-        });
-    })();
-    </script>
+    <script src="/assets/js/cookies.js"></script>
 
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/icons-replace.js"></script>

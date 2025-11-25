@@ -2,10 +2,12 @@
 <?php include __DIR__ . '/../layouts/header.php'; ?>
 
 <div class="container" style="max-width: 800px; margin-top: 2rem;">
-    <h1 style="margin-bottom: 2rem;">
-        <?php echo $type === 'followers' ? '<i class="fas fa-users" aria-hidden="true"></i> Seguidores' : '<i class="fas fa-link" aria-hidden="true"></i> Siguiendo'; ?> 
-        de <?php echo htmlspecialchars($user['username']); ?>
-    </h1>
+    <div class="hero-section" style="text-align: left; padding:1.25rem 1rem; margin-bottom:1.25rem;">
+        <div style="position:relative;z-index:2;">
+            <h1 style="margin:0 0 0.35rem 0;"><?php echo $type === 'followers' ? '<i class="fas fa-users" aria-hidden="true"></i> Seguidores' : '<i class="fas fa-link" aria-hidden="true"></i> Siguiendo'; ?> de <?php echo htmlspecialchars($user['username']); ?></h1>
+            <p style="margin:0; opacity:0.95;">Conoce quién sigue a <?php echo htmlspecialchars($user['username']); ?> y gestiona tus conexiones.</p>
+        </div>
+    </div>
     
     <?php if (empty($followers)): ?>
         <div class="empty-state" style="text-align: center; padding: 4rem 2rem;">
@@ -64,30 +66,6 @@
     </div>
 </div>
 
-<script>
-function toggleFollow(userId, button) {
-    fetch(`/follow/${userId}`, {
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            if (data.is_following) {
-                button.className = 'btn btn-outline';
-                button.innerHTML = '✓ Siguiendo';
-            } else {
-                button.className = 'btn btn-primary';
-                button.innerHTML = '+ Seguir';
-            }
-        } else {
-            alert(data.message || 'Error');
-            if (data.message && data.message.includes('iniciar sesión')) {
-                window.location.href = '/login';
-            }
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-</script>
+<script src="/assets/js/follower.js"></script>
 
 <?php include __DIR__ . '/../layouts/footer.php'; ?>

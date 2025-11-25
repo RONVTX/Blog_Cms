@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            <label for="image">🖼️ Cambiar imagen (opcional, máx. 5MB):</label>
+            <label for="image">Cambiar imagen (opcional, máx. 5MB):</label>
             <?php if ($post['image']): ?>
                 <img src="/<?php echo htmlspecialchars($post['image']); ?>" 
                      alt="Imagen actual" 

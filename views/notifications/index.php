@@ -2,11 +2,16 @@
 <?php include __DIR__ . '/../layouts/header.php'; ?>
 
 <div style="max-width: 800px; margin: 2rem auto;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-        <h1><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#bell"></use></svg> Notificaciones</h1>
-        <form method="POST" action="/notifications/read-all">
-            <button type="submit" class="btn btn-outline btn-sm">✓ Marcar todas como leídas</button>
-        </form>
+    <div class="hero-section" style="text-align: left; padding: 2rem 1.25rem; margin-bottom: 1.5rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;position:relative;z-index:2;">
+            <div>
+                <h1 style="margin:0;"><svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#bell"></use></svg> Notificaciones</h1>
+                <p style="margin:0.35rem 0 0 0; opacity:0.95;">Revisa lo último: seguidores, likes y actividad.</p>
+            </div>
+            <form method="POST" action="/notifications/read-all">
+                <button type="submit" class="btn btn-outline btn-sm">✓ Marcar todas como leídas</button>
+            </form>
+        </div>
     </div>
 
     <?php if (empty($notifications)): ?>
@@ -87,18 +92,6 @@
     <?php endif; ?>
 </div>
 
-<script>
-function markAsRead(notifId) {
-    fetch(`/notifications/${notifId}/read`, {
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            location.reload();
-        }
-    });
-}
-</script>
+<script src="/assets/js/main.js"></script>
 
 <?php include __DIR__ . '/../layouts/footer.php'; ?>

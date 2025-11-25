@@ -4,6 +4,15 @@
     padding: 0;
 }
 
+@keyframes stars {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 200px 200px;
+    }
+}
+
 .admin-layout {
     display: flex;
     min-height: 100vh;
@@ -97,7 +106,7 @@
 }
 
 .admin-topbar {
-    background: white;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -106,6 +115,47 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.admin-topbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, white, rgba(255,255,255,0)),
+        radial-gradient(2px 2px at 60px 70px, white, rgba(255,255,255,0)),
+        radial-gradient(1px 1px at 50px 50px, white, rgba(255,255,255,0)),
+        radial-gradient(1px 1px at 130px 80px, white, rgba(255,255,255,0)),
+        radial-gradient(2px 2px at 90px 10px, white, rgba(255,255,255,0)),
+        radial-gradient(1px 1px at 130px 130px, white, rgba(255,255,255,0));
+    background-size: 200px 200px;
+    background-position: 0 0;
+    animation: stars 20s linear infinite;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.admin-topbar-left,
+.admin-topbar-right {
+    position: relative;
+    z-index: 2;
+}
+
+.admin-topbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.admin-topbar-right {
+    display: flex;
+    align-items: center;
 }
 
 .admin-mobile-toggle {
@@ -114,14 +164,15 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
+    color: white;
 }
 
 .admin-user {
-    color: #64748b;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .admin-user strong {
-    color: #1e293b;
+    color: white;
 }
 
 .admin-content {

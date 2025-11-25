@@ -21,12 +21,7 @@
     ?>
     <!-- Analytics: replace GA_MEASUREMENT_ID with your ID -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);} 
-      gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID', { 'anonymize_ip': true });
-    </script>
+    <script src="/assets/js/main.js"></script>
     <?php endif; ?>
 </head>
 <body>

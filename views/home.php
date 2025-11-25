@@ -1,6 +1,12 @@
 <?php $pageTitle = 'Inicio - ' . APP_NAME; ?>
 <?php include __DIR__ . '/layouts/header.php'; ?>
 
+<!-- Hero Section -->
+<div class="hero-section">
+    <h1>Bienvenido a <?php echo APP_NAME; ?></h1>
+    <p>Descubre las mejores historias, artículos y perspectivas de nuestra comunidad</p>
+</div>
+
 <div class="layout-with-sidebar">
     <aside class="sidebar">
         <div class="sidebar-section">

@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            <label for="image">🖼️ Imagen de portada (opcional, máx. 5MB):</label>
+            <label for="image">Imagen de portada (opcional, máx. 5MB):</label>
             <input type="file" 
                    id="image" 
                    name="image" 

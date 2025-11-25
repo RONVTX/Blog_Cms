@@ -1,8 +1,15 @@
 <?php $pageTitle = 'Mis Marcadores'; ?>
 <?php include __DIR__ . '/../layouts/header.php'; ?>
 
-<div style="background: var(--gradient); color: white; padding: 3rem 0; border-radius: 16px; margin-bottom: 3rem;">
-    <div class="container">
+<div style="background: var(--gradient); color: white; padding: 3rem 0; border-radius: 16px; margin-bottom: 3rem; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: 
+        radial-gradient(2px 2px at 20px 30px, white, rgba(255,255,255,0)),
+        radial-gradient(2px 2px at 60px 70px, white, rgba(255,255,255,0)),
+        radial-gradient(1px 1px at 50px 50px, white, rgba(255,255,255,0)),
+        radial-gradient(1px 1px at 130px 80px, white, rgba(255,255,255,0)),
+        radial-gradient(2px 2px at 90px 10px, white, rgba(255,255,255,0)),
+        radial-gradient(1px 1px at 130px 130px, white, rgba(255,255,255,0)); background-size: 200px 200px; animation: stars 20s linear infinite; opacity: 0.5; pointer-events: none;" ></div>
+    <div class="container" style="position: relative; z-index: 2;">
         <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">
                 <svg class="icon icon-header" aria-hidden="true"><use href="/assets/icons.svg#bookmark"></use></svg> Mis Marcadores
         </h1>

@@ -189,28 +189,5 @@
     </div>
 </div>
 
-<script>
-function openReportModalPublic(type, id) {
-    document.getElementById('reportedType').value = type;
-    document.getElementById('reportedId').value = id;
-    document.getElementById('reportReason').value = '';
-    document.getElementById('reportModalPublic').style.display = 'flex';
-}
 
-function closeReportModalPublic() {
-    document.getElementById('reportModalPublic').style.display = 'none';
-}
-
-// Cerrar modal al hacer clic fuera de él
-document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById('reportModalPublic');
-    if (modal) {
-        modal.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                closeReportModalPublic();
-            }
-        });
-    }
-});
-</script>
 <?php include __DIR__ . '/../layouts/footer.php'; ?>

@@ -227,6 +227,58 @@ function sharePost(title, url) {
         });
     }
 }
+function openReportModalPublic(type, id) {
+    document.getElementById('reportedType').value = type;
+    document.getElementById('reportedId').value = id;
+    document.getElementById('reportReason').value = '';
+    document.getElementById('reportModalPublic').style.display = 'flex';
+}
+
+function closeReportModalPublic() {
+    document.getElementById('reportModalPublic').style.display = 'none';
+}
+
+// Cerrar modal al hacer clic fuera de él
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('reportModalPublic');
+    if (modal) {
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeReportModalPublic();
+            }
+        });
+    }
+});
+function markAsRead(notifId) {
+    fetch(`/notifications/${notifId}/read`, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+}
+   window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID', { 'anonymize_ip': true });
+      //admin footer
+             function toggleSidebar() {
+            document.querySelector('.admin-sidebar').classList.toggle('active');
+        }
+        
+        // Auto-hide alerts
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 300);
+                }, 5000);
+            });
+        });
 
 
 
