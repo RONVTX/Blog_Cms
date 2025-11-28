@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * Router simple
+ * - Mapea rutas (GET/POST) a `Controller@method`.
+ * - Soporta middleware por ruta. El middleware se instancia y su método
+ *   `handle()` se ejecuta antes del controlador.
+ * - Las rutas se prueban en el orden de definición; por eso rutas
+ *   específicas deben definirse antes de rutas parametrizadas.
+ */
+
 class Router {
     private static $routes = [];
 

@@ -1,5 +1,9 @@
 <?php
 
+// Archivo de configuración de la base de datos.
+// Para entornos de producción se recomienda cargar estas opciones desde
+// variables de entorno (.env) y no versionarlas en el repositorio.
+
 return [
     'host' => 'localhost',
     'dbname' => 'blog_cms',

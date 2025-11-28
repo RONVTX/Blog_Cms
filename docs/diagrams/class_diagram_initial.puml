@@ -1,0 +1,227 @@
+@startuml Blog_Cms - Diagrama de Clases Inicial
+!theme plain
+title Blog_Cms - Diagrama de Clases (Estado Actual)
+
+' ==================== BASE ====================
+abstract class BaseController {
+    #request: array
+    #response: string
+    #validate(data, rules): boolean
+    #redirect(path): void
+}
+
+' ==================== CONTROLLERS ====================
+class HomeController extends BaseController {
+    +index(): void
+}
+
+class AuthController extends BaseController {
+    +showLogin(): void
+    +login(): void
+    +showRegister(): void
+    +register(): void
+    +logout(): void
+}
+
+class PostController extends BaseController {
+    +create(): void
+    +store(data): void
+    +edit(id): void
+    +update(id, data): void
+    +delete(id): void
+    +show(slug): void
+}
+
+class AdminController extends BaseController {
+    +dashboard(): void
+    +users(): void
+    +posts(): void
+    +comments(): void
+    +reports(): void
+    +settings(): void
+    +updateUserRole(id, role): void
+}
+
+class CommentController extends BaseController {
+    +store(postId, data): void
+    +delete(id): void
+}
+
+class LikeController extends BaseController {
+    +toggle(postId): void
+}
+
+class NotificationController extends BaseController {
+    +index(): void
+    +markAsRead(id): void
+    +getUnreadCount(): int
+}
+
+class FollowerController extends BaseController {
+    +toggle(userId): void
+    +followers(username): void
+    +following(username): void
+}
+
+' ==================== MODELS ====================
+class Database {
+    -pdo: PDO
+    +query(sql, params): mixed
+    +insert(table, data): int
+    +update(table, data, where): int
+    +delete(table, where): int
+    +fetch(sql, params): array
+}
+
+abstract class BaseModel {
+    #table: string
+    #fillable: array
+    +save(): boolean
+    +delete(): boolean
+    +toArray(): array
+}
+
+class User extends BaseModel {
+    +id: int
+    +username: string
+    +email: string
+    +password: string
+    +role: string
+    +status: string
+    +static find(id): User
+    +static where(column, value): array
+    +verify(): boolean
+}
+
+class Post extends BaseModel {
+    +id: int
+    +title: string
+    +slug: string
+    +content: string
+    +status: string
+    +featured: boolean
+    +views: int
+    +user_id: int
+    +static published(): array
+    +static featured(): array
+}
+
+class Comment extends BaseModel {
+    +id: int
+    +content: string
+    +post_id: int
+    +user_id: int
+    +status: string
+    +author(): User
+    +post(): Post
+}
+
+class Like extends BaseModel {
+    +post_id: int
+    +user_id: int
+    +count(postId): int
+}
+
+class Category extends BaseModel {
+    +id: int
+    +name: string
+    +slug: string
+    +icon: string
+}
+
+class Tag extends BaseModel {
+    +id: int
+    +name: string
+    +slug: string
+}
+
+class Notification extends BaseModel {
+    +user_id: int
+    +type: string
+    +content: string
+    +is_read: boolean
+    +static forUser(userId): array
+}
+
+class Report extends BaseModel {
+    +reporter_id: int
+    +reported_type: string
+    +reported_id: int
+    +reason: string
+    +status: string
+}
+
+' ==================== MIDDLEWARE ====================
+interface Middleware {
+    +handle(): void
+}
+
+class AuthMiddleware implements Middleware {
+    +handle(): void
+}
+
+class AdminMiddleware implements Middleware {
+    +handle(): void
+}
+
+class GuestMiddleware implements Middleware {
+    +handle(): void
+}
+
+' ==================== HELPERS ====================
+class Session {
+    +static set(key, value): void
+    +static get(key): mixed
+    +static has(key): boolean
+    +static forget(key): void
+}
+
+class Validator {
+    -errors: array
+    +validate(data, rules): boolean
+    +getErrors(): array
+}
+
+class FileUploader {
+    +upload(file, path): string
+    +validate(file): boolean
+}
+
+class Cookie {
+    +static set(key, value, expire): void
+    +static get(key): mixed
+    +static delete(key): void
+}
+
+' ==================== RELACIONES ====================
+BaseController --> Database: usa
+BaseController --> Session: usa
+BaseController --> Validator: usa
+
+PostController --> Post: manipula
+PostController --> Comment: maneja
+PostController --> FileUploader: subidas
+
+AdminController --> User: gestiona
+AdminController --> Post: modera
+AdminController --> Report: resuelve
+
+User "1" --> "*" Post: crea
+User "1" --> "*" Comment: escribe
+User "1" --> "*" Like: realiza
+User "1" --> "*" Notification: recibe
+User "1" --> "*" Follower: sigue
+
+Post "1" --> "*" Comment: contiene
+Post "1" --> "*" Like: obtiene
+Post "*" --> "*" Category: pertenece
+Post "*" --> "*" Tag: etiquetado
+Post "1" --> "*" Report: puede ser
+
+Comment --> User: escrito por
+Comment --> Post: en
+
+AuthMiddleware --> User: valida
+AdminMiddleware --> User: verifica rol
+
+@enduml

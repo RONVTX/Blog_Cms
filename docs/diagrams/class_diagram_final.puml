@@ -1,0 +1,416 @@
+@startuml Blog_Cms - Diagrama de Clases Final
+!theme plain
+title Blog_Cms - Diagrama de Clases (Arquitectura Mejorada)
+
+' ==================== INTERFACES ====================
+interface Controller {
+    +render(view, data): void
+    +json(data, status): void
+}
+
+interface Repository {
+    +find(id): Model
+    +all(): array
+    +create(data): Model
+    +update(id, data): boolean
+    +delete(id): boolean
+}
+
+interface Middleware {
+    +handle(request): void
+}
+
+interface Service {
+    +execute(): mixed
+}
+
+' ==================== BASE CLASSES ====================
+abstract class BaseController implements Controller {
+    #repository: Repository
+    #service: Service
+    #request: Request
+    #response: Response
+    #validate(data, rules): ValidationResult
+    #authorize(action): boolean
+    #render(view, data): void
+    #json(data, status): void
+}
+
+abstract class BaseModel {
+    #table: string
+    #fillable: array
+    #timestamps: boolean
+    +save(): boolean
+    +delete(): boolean
+    +toArray(): array
+    +toJson(): string
+}
+
+abstract class BaseRepository<T> implements Repository {
+    #model: T
+    +find(id): T
+    +all(): array
+    +create(data): T
+    +update(id, data): boolean
+    +delete(id): boolean
+    +where(column, value): array
+}
+
+' ==================== CONTROLLERS ====================
+class HomeController extends BaseController {
+    +index(): void
+}
+
+class AuthController extends BaseController {
+    #authService: AuthService
+    +showLogin(): void
+    +login(): void
+    +showRegister(): void
+    +register(): void
+    +logout(): void
+}
+
+class PostController extends BaseController {
+    #postService: PostService
+    #commentService: CommentService
+    +create(): void
+    +store(data): void
+    +edit(id): void
+    +update(id, data): void
+    +delete(id): void
+    +show(slug): void
+}
+
+class AdminController extends BaseController {
+    #adminService: AdminService
+    #reportService: ReportService
+    +dashboard(): void
+    +users(): void
+    +posts(): void
+    +comments(): void
+    +reports(): void
+    +settings(): void
+    +updateUserRole(id, role): void
+}
+
+' ==================== SERVICES ====================
+class AuthService implements Service {
+    #userRepository: UserRepository
+    #tokenService: TokenService
+    +login(email, password): User
+    +register(data): User
+    +logout(userId): boolean
+    +verify(token): User
+}
+
+class PostService implements Service {
+    #postRepository: PostRepository
+    #categoryRepository: CategoryRepository
+    #tagRepository: TagRepository
+    +createPost(userId, data): Post
+    +updatePost(id, data): Post
+    +deletePost(id): boolean
+    +getPublishedPosts(): array
+    +getFeaturedPosts(): array
+}
+
+class CommentService implements Service {
+    #commentRepository: CommentRepository
+    #notificationService: NotificationService
+    +createComment(postId, userId, data): Comment
+    +deleteComment(id): boolean
+    +approveComment(id): boolean
+    +notifyAuthor(comment): void
+}
+
+class AdminService implements Service {
+    #userRepository: UserRepository
+    #postRepository: PostRepository
+    #reportRepository: ReportRepository
+    +getUserStats(): array
+    +getPostStats(): array
+    +getReportStats(): array
+    +getDashboardData(): array
+}
+
+class NotificationService implements Service {
+    #notificationRepository: NotificationRepository
+    +notify(userId, type, content): Notification
+    +markAsRead(id): boolean
+    +markAllAsRead(userId): boolean
+    +getUnreadCount(userId): int
+}
+
+' ==================== MODELS ====================
+class User extends BaseModel {
+    +id: int
+    +username: string
+    +email: string
+    +password: string
+    +role: string
+    +status: string
+    +avatar: string
+    +bio: string
+    +static find(id): User
+    +posts(): array
+    +comments(): array
+    +followers(): array
+    +following(): array
+}
+
+class Post extends BaseModel {
+    +id: int
+    +user_id: int
+    +title: string
+    +slug: string
+    +content: string
+    +excerpt: string
+    +image: string
+    +status: string
+    +featured: boolean
+    +views: int
+    +author(): User
+    +comments(): array
+    +categories(): array
+    +tags(): array
+    +likes(): array
+}
+
+class Comment extends BaseModel {
+    +id: int
+    +post_id: int
+    +user_id: int
+    +content: string
+    +status: string
+    +author(): User
+    +post(): Post
+    +replies(): array
+}
+
+class Category extends BaseModel {
+    +id: int
+    +name: string
+    +slug: string
+    +description: string
+    +icon: string
+    +color: string
+    +posts(): array
+}
+
+class Tag extends BaseModel {
+    +id: int
+    +name: string
+    +slug: string
+    +posts(): array
+}
+
+class Notification extends BaseModel {
+    +id: int
+    +user_id: int
+    +type: string
+    +content: string
+    +link: string
+    +is_read: boolean
+    +user(): User
+    +markAsRead(): boolean
+}
+
+class Report extends BaseModel {
+    +id: int
+    +reporter_id: int
+    +reported_type: string
+    +reported_id: int
+    +reason: string
+    +status: string
+    +admin_notes: string
+    +reporter(): User
+}
+
+class Like extends BaseModel {
+    +post_id: int
+    +user_id: int
+    +user(): User
+    +post(): Post
+}
+
+class Follower extends BaseModel {
+    +follower_id: int
+    +following_id: int
+    +follower(): User
+    +following(): User
+}
+
+class Bookmark extends BaseModel {
+    +user_id: int
+    +post_id: int
+    +user(): User
+    +post(): Post
+}
+
+' ==================== REPOSITORIES ====================
+class UserRepository extends BaseRepository {
+    +findByEmail(email): User
+    +findByUsername(username): User
+    +getAdmins(): array
+    +getModerators(): array
+}
+
+class PostRepository extends BaseRepository {
+    +findBySlug(slug): Post
+    +getPublished(): array
+    +getFeatured(): array
+    +getTrending(): array
+    +searchByTitle(query): array
+}
+
+class CommentRepository extends BaseRepository {
+    +getByPostId(postId): array
+    +getApproved(postId): array
+    +getPending(): array
+}
+
+class NotificationRepository extends BaseRepository {
+    +getByUserId(userId): array
+    +getUnread(userId): array
+}
+
+class ReportRepository extends BaseRepository {
+    +getPending(): array
+    +getResolving(): array
+    +getByType(type): array
+}
+
+' ==================== MIDDLEWARE ====================
+class AuthMiddleware implements Middleware {
+    #userRepository: UserRepository
+    +handle(request): void
+}
+
+class AdminMiddleware implements Middleware {
+    #userRepository: UserRepository
+    +handle(request): void
+}
+
+class GuestMiddleware implements Middleware {
+    +handle(request): void
+}
+
+class LogMiddleware implements Middleware {
+    #activityLogger: ActivityLogger
+    +handle(request): void
+}
+
+' ==================== REQUEST/RESPONSE ====================
+class Request {
+    +method: string
+    +path: string
+    +query: array
+    +body: array
+    +headers: array
+    +user: User
+    +get(key, default): mixed
+    +all(): array
+    +validate(rules): ValidationResult
+}
+
+class Response {
+    +status: int
+    +headers: array
+    +body: mixed
+    +send(): void
+}
+
+class ValidationResult {
+    +passed: boolean
+    -errors: array
+    +fails(): boolean
+    +errors(key): array
+}
+
+' ==================== HELPERS ====================
+class Session {
+    +static set(key, value): void
+    +static get(key): mixed
+    +static has(key): boolean
+    +static forget(key): void
+    +static flush(): void
+}
+
+class Validator {
+    -errors: array
+    +validate(data, rules): ValidationResult
+    +getErrors(): array
+}
+
+class FileUploader {
+    +upload(file, path): string
+    +validate(file): ValidationResult
+    +delete(path): boolean
+}
+
+class Cookie {
+    +static set(key, value, expire): void
+    +static get(key): mixed
+    +static delete(key): void
+}
+
+class ActivityLogger {
+    +log(userId, action, description): void
+    +getLog(userId): array
+}
+
+class TokenService {
+    +generate(user): string
+    +verify(token): User
+    +refresh(token): string
+}
+
+' ==================== RELACIONES ====================
+BaseController --> Request: recibe
+BaseController --> Response: devuelve
+BaseController --> Repository: usa
+BaseController --> Service: delega
+
+AuthController --> AuthService: usa
+PostController --> PostService: usa
+PostController --> CommentService: usa
+AdminController --> AdminService: usa
+
+AuthService --> UserRepository: consulta
+AuthService --> TokenService: genera tokens
+
+PostService --> PostRepository: manipula
+PostService --> CategoryRepository: gestiona
+PostService --> TagRepository: etiqueta
+PostService --> NotificationService: notifica
+
+CommentService --> CommentRepository: manipula
+CommentService --> NotificationService: notifica
+
+AdminService --> UserRepository: reportes
+AdminService --> PostRepository: reportes
+AdminService --> ReportRepository: gestiona
+
+NotificationService --> NotificationRepository: persiste
+
+User "1" --> "*" Post: crea
+User "1" --> "*" Comment: escribe
+User "1" --> "*" Like: realiza
+User "1" --> "*" Notification: recibe
+User "1" --> "*" Follower: sigue
+User "1" --> "*" Bookmark: guarda
+
+Post "1" --> "*" Comment: contiene
+Post "1" --> "*" Like: recibe
+Post "*" --> "*" Category: pertenece
+Post "*" --> "*" Tag: etiquetado
+Post "1" --> "*" Report: puede ser
+
+Comment --> User: escrito por
+Comment --> Post: en
+
+AuthMiddleware --> UserRepository: valida
+AdminMiddleware --> UserRepository: verifica rol
+LogMiddleware --> ActivityLogger: registra
+
+@enduml

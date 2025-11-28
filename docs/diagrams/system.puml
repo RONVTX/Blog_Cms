@@ -1,0 +1,30 @@
+@startuml
+title Blog_Cms - Diagrama de componentes y flujo
+
+actor Usuario
+boundary Browser
+component Router
+component Controllers
+database Database
+component Views
+component Helpers
+
+Usuario -> Browser : Navega a URL
+Browser -> Router : Solicitud HTTP
+Router -> Controllers : Llama Controller@method
+Controllers -> Helpers : Valida / Subida archivos / Sesión
+Controllers -> Database : Consulta / Persiste (Modelos)
+Database --> Controllers : Resultado
+Controllers -> Views : Renderiza plantilla
+Views --> Browser : HTML
+
+note left of Router
+  Rutas definidas en routes/web.php
+  Middleware aplicados aquí
+end note
+
+note right of Database
+  Esquema en database/schema.sql
+end note
+
+@enduml
