@@ -1,4 +1,4 @@
-# 🚀 Blog_Cms — CMS de Blog Profesional en PHP
+# 🚀 Blog_Cms — CMS de Blog en PHP
 
 Sistema de gestión de contenidos (CMS) para blogs desarrollado en **PHP POO**, **PDO**, **arquitectura MVC** personalizada y **panel de administración completo**, sin dependencias de frameworks pesados.
 
